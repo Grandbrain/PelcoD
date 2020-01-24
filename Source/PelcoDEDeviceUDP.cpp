@@ -10,104 +10,110 @@ namespace PelcoD {
 
 	namespace {
 
-		///
-		/// \details
+		/// Pelco-DE request command to get pan steps.
+		/// \details Request command value to obtain pan value in steps.
 		constexpr std::uint8_t COMMAND_REQUEST_GET_PAN_STEPS { 0x51 };
 
-		///
-		/// \details
+		/// Pelco-DE request command to get tilt steps.
+		/// \details Request command value to obtain tilt value in steps.
 		constexpr std::uint8_t COMMAND_REQUEST_GET_TILT_STEPS { 0x53 };
 
-		///
-		/// \details
+		/// Pelco-DE request command to get pan maximum number of steps.
+		/// \details Request command value to obtain pan maximum value in steps.
 		constexpr std::uint8_t COMMAND_REQUEST_GET_PAN_MAX_STEPS { 0x55 };
 
-		///
-		/// \details
+		/// Pelco-DE request command to get tilt maximum number of steps.
+		/// \details Request command value to obtain tilt maximum value in steps.
 		constexpr std::uint8_t COMMAND_REQUEST_GET_TILT_MAX_STEPS { 0x57 };
 
-		///
-		/// \details
+		/// Pelco-DE responce command to get pan steps.
+		/// \details Responce command value to obtain pan value in steps.
 		constexpr std::uint8_t COMMAND_RESPONCE_GET_PAN_STEPS { 0x61 };
 
-		///
-		/// \details
+		/// Pelco-DE responce command to get tilt steps.
+		/// \details Responce command value to obtain tilt value in steps.
 		constexpr std::uint8_t COMMAND_RESPONCE_GET_TILT_STEPS { 0x63 };
 
-		///
-		/// \details
+		/// Pelco-DE responce command to get pan maximum number of steps.
+		/// \details Responce command value to obtain pan maximum value in steps.
 		constexpr std::uint8_t COMMAND_RESPONCE_GET_PAN_MAX_STEPS { 0x65 };
 
-		///
-		/// \details
+		/// Pelco-DE responce command to get tilt maximum number of steps.
+		/// \details Responce command value to obtain tilt maximum value in steps.
 		constexpr std::uint8_t COMMAND_RESPONCE_GET_TILT_MAX_STEPS { 0x67 };
 
-		///
-		/// \details
+		/// Pelco-DE request command to set pan steps.
+		/// \details Request command value to set pan value in steps.
 		constexpr std::uint8_t COMMAND_REQUEST_SET_PAN_STEPS { 0x71 };
 
-		///
-		/// \details
+		/// Pelco-DE request command to set tilt steps.
+		/// \details Request command value to set tilt value in steps.
 		constexpr std::uint8_t COMMAND_REQUEST_SET_TILT_STEPS { 0x73 };
 
-		///
-		/// \details
+		/// Pelco-DE responce command to set pan steps.
+		/// \details Responce command value to set pan value in steps.
 		constexpr std::uint8_t COMMAND_RESPONCE_SET_PAN_STEPS { 0x7C };
 
-		///
-		/// \details
+		/// Pelco-DE responce command to set tilt steps.
+		/// \details Responce command value to set tilt value in steps.
 		constexpr std::uint8_t COMMAND_RESPONCE_SET_TILT_STEPS { 0x7C };
 
-		///
-		/// \details
+		/// Pelco-DE request command to get temperature.
+		/// \details Request command value to obtain temperature value.
 		constexpr std::uint8_t COMMAND_REQUEST_GET_TEMPERATURE { 0x91 };
 
-		///
-		/// \details
+		/// Pelco-DE request command to get voltage.
+		/// \details Request command value to obtain voltage value.
 		constexpr std::uint8_t COMMAND_REQUEST_GET_VOLTAGE { 0x9B };
 
-		///
-		/// \details
+		/// Pelco-DE responce command to get temperature.
+		/// \details Responce command value to obtain temperature value.
 		constexpr std::uint8_t COMMAND_RESPONCE_GET_TEMPERATURE { 0xA1 };
 
-		///
-		/// \details
+		/// Pelco-DE responce command to get voltage.
+		/// \details Responce command value to obtain voltage value.
 		constexpr std::uint8_t COMMAND_RESPONCE_GET_VOLTAGE { 0xAB };
 
-		///
-		/// \details
+		/// Synchronization value.
+		/// \details Pelco-DE protocol synchronization value.
 		constexpr std::uint8_t SYNCHRONIZATION_VALUE { 0xFF };
 
-		///
-		/// \details
+		/// Device address.
+		/// \details Pelco-DE device logical address.
 		constexpr std::uint8_t ADDRESS_VALUE { 0x01 };
 
-		///
-		/// \details
+		/// Message length.
+		/// \details Pelco-DE fixed message length in bytes.
 		constexpr std::size_t MESSAGE_LENGTH { 7 };
 
-		///
-		/// \details
+		/// Device address byte index.
+		/// \details The index in the byte array of the message in which the
+		/// device logical address is stored.
 		constexpr std::size_t ADDRESS_BYTE_INDEX { 1 };
 
-		///
-		/// \details
+		/// First command byte index.
+		/// \details The index in the byte array of the message in which the
+		/// first command is stored.
 		constexpr std::size_t COMMAND1_BYTE_INDEX { 2 };
 
-		///
-		/// \details
+		/// Second command byte index.
+		/// \details The index in the byte array of the message in which the
+		/// second command is stored.
 		constexpr std::size_t COMMAND2_BYTE_INDEX { 3 };
 
-		///
-		/// \details
+		/// Value high byte index.
+		/// \details The index in the byte array of the message in which the
+		/// value high byte is stored.
 		constexpr std::size_t VALUE_HIGH_BYTE_INDEX { 4 };
 
-		///
-		/// \details
+		/// Value low byte index.
+		/// \details The index in the byte array of the message in which the
+		/// value low byte is stored.
 		constexpr std::size_t VALUE_LOW_BYTE_INDEX { 5 };
 
-		///
-		/// \details
+		/// Checksum byte index.
+		/// \details The index in the byte array of the message in which the
+		/// checksum is stored.
 		constexpr std::size_t CHECKSUM_BYTE_INDEX { 6 };
 
 		/// Calculates the checksum of a Pelco-DE message.
@@ -181,10 +187,10 @@ namespace PelcoD {
 
 	/// Constructor.
 	/// \details Initializes object fields.
-	/// \param[in]	ip
-	/// \param[in]	port
-	/// \param[in]	maxPanDegrees
-	/// \param[in]	maxTiltDegrees
+	/// \param[in]	ip 				IP address.
+	/// \param[in]	port 			Port.
+	/// \param[in]	maxPanDegrees	Pan maximum number of degrees.
+	/// \param[in]	maxTiltDegrees	Tilt maximum number of degrees.
 	PelcoDEDeviceUDP::PelcoDEDeviceUDP(const std::string& ip,
 	                                   std::uint16_t port,
 	                                   std::uint16_t maxPanDegrees,

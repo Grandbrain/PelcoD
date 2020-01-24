@@ -18,10 +18,10 @@ namespace PelcoD {
 	public:
 
 		/// Constructor.
-		/// \param[in]	ip
-		/// \param[in]	port
-		/// \param[in]	max_pan_degrees
-		/// \param[in]	max_tilt_degrees
+		/// \param[in]	ip 				IP address.
+		/// \param[in]	port 			Port.
+		/// \param[in]	maxPanDegrees	Pan maximum number of degrees.
+		/// \param[in]	maxTiltDegrees	Tilt maximum number of degrees.
 		PelcoDEDeviceUDP(const std::string& ip,
 		                 std::uint16_t port,
 		                 std::uint16_t maxPanDegrees = 360,
